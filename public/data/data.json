@@ -1,0 +1,53 @@
+[
+    {
+        "id":1,
+        "nombre": "Auriculares Bluetooth",
+        "precio": 15000,
+        "stock": 25,
+        "imagen": "https://www.freepik.es/foto-gratis/auriculares-fondo-monocromatico-minimalista_65358241.htm#fromView=search&page=1&position=4&uuid=d5d1f0b9-7462-4798-94a4-f0bfe2f002bb&query=auriculares"
+       
+    },
+
+    {
+        "id":2,
+        "nombre": "Teclado Mecánico",
+        "precio": 22000,
+        "stock": 20,
+        "imagen": "https://unsplash.com/es/fotos/teclado-de-computadora-plateado-y-blanco-PXaQXThG1FY"
+    },
+    {
+        "id":3,
+        "nombre": "Mouse Gamer",
+        "precio": 12000,
+        "stock": 50,
+        "imagen": "https://unsplash.com/es/fotos/raton-de-ordenador-inalambrico-negro-sobre-superficie-negra-4PchFKrUw84"
+    },
+    {
+        "id":4,
+        "nombre": "Monitor LED 24\"",
+        "precio": 55000,
+        "stock": 10,
+        "imagen": "https://unsplash.com/es/fotos/un-televisor-de-pantalla-plana-sentado-encima-de-un-soporte-de-madera-jlAZ4REv9v0"
+    },
+    {
+        "id":5,
+        "nombre": "Disco SSD 1TB",
+        "precio": 40000,
+        "stock": 25,
+        "imagen": "https://unsplash.com/es/fotos/unidad-de-disco-duro-plateada-y-negra-NZY3eCGZZEU"
+    },
+    {
+        "id":6,
+        "nombre": "Notebook Lenovo 15.6\"",
+        "precio": 280000,
+        "stock": 5,
+        "imagen": "https://unsplash.com/es/fotos/macbook-pro-encima-de-la-mesa-marron-1SAnrIxw5OY"
+    },
+    {
+        "id":7,
+        "nombre": "Impresora Multifunción",
+        "precio": 65000,
+        "stock": 8,
+        "imagen": "https://unsplash.com/es/fotos/impresora-hp-todo-en-uno-blanca-y-gris-5AoOejjRUrA"
+    }
+]
