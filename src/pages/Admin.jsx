@@ -6,9 +6,11 @@ import { Helmet } from "react-helmet";
 import FormularioProducto from "../components/FormularioProducto";
 import FormularioEdicion from "../components/FormularioEdicion";
 import "./styleAdmin.css";
+import { useAuth } from "../context/AuthContext";
 
 function Admin() {
   const { setIsAuth } = useContext(CartContext);
+  const { userRole } = useAuth();
   const {
     productos,
     agregarProducto,
@@ -21,6 +23,14 @@ function Admin() {
   const [seleccionado, setSeleccionado] = useState(null);
   const navigate = useNavigate();
 
+   if (userRole !== 'admin') {
+  return (
+    <div className="no-access">
+      <h2>Acceso denegado</h2>
+      <p>No tienes permisos para acceder a esta sección.</p>
+    </div>
+  );
+}
   return (
     <>
       <Helmet>
@@ -51,29 +61,6 @@ function Admin() {
 
         <h2 className="title">Panel de Administración</h2>
 
-        <button
-          className="addProductBtn"
-          onClick={() => setOpen(true)}
-          aria-label="Agregar nuevo producto"
-        >
-          Agregar Producto Nuevo
-        </button>
-
-        {open && (
-          <FormularioProducto
-            agregarProducto={agregarProducto}
-            cerrar={() => setOpen(false)}
-          />
-        )}
-
-        {openEditor && (
-          <FormularioEdicion
-            producto={seleccionado}
-            actualizarProducto={actualizarProducto}
-            cerrar={() => setOpenEditor(false)}
-          />
-        )}
-
         <ul className="list">
           {productos.map((product) => (
             <li className="listItem" key={product.id}>
@@ -83,13 +70,14 @@ function Admin() {
                 alt={`Imagen del producto ${product.name}`}
               />
               <h4>{product.name}</h4>
-              <p>Precio: ${product.precio}</p>
+              <p>Precio: ${product.price}</p>
               <div>
                 <button
                   className="editButton"
                   onClick={() => {
                     setOpenEditor(true);
                     setSeleccionado(product);
+                    setOpen(false);
                   }}
                   aria-label={`Editar producto ${product.name}`}
                 >
@@ -102,10 +90,38 @@ function Admin() {
                 >
                   Eliminar
                 </button>
+                
               </div>
             </li>
           ))}
         </ul>
+        <button
+          className="addProductBtn"
+          onClick={() => {setOpen(true);
+            setOpenEditor(false);
+          }}
+          aria-label="Agregar nuevo producto"
+        >
+          Agregar Producto Nuevo
+        </button>
+
+        
+
+        {open && (
+          <FormularioProducto
+            onAgregar={agregarProducto}
+            cerrar={() => setOpen(false)}
+          />
+        )}
+
+        {openEditor && (
+          <FormularioEdicion
+            producto={seleccionado}
+            onActualizar={actualizarProducto}
+            cerrar={() => setOpenEditor(false)}
+          />
+        )}
+
       </div>
     </>
   );

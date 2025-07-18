@@ -6,8 +6,8 @@ import "./styleFormularioProducto.css"
 
 function FormularioProducto ({onAgregar}) {
     const [productos, setProductos] = useState({
-        nombre: '',
-        precio: '',
+        name: '',
+        price: '',
         stock: '',
         imagen: '',
         description: ''

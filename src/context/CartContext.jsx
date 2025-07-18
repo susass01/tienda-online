@@ -23,6 +23,18 @@ export const CartProvider = ({children}) => {
       setUsuarioLogeado(!usuarioLogeado)
     }
 
+      useEffect(() => {
+        const auth = localStorage.getItem("isAuth");
+        if (auth === "true") {
+        setIsAuth(true);
+        }
+      }, []);
+
+      // Guardar estado de autenticación en localStorage cada vez que cambie
+      useEffect(() => {
+      localStorage.setItem("isAuth", isAuthenticated);
+      }, [isAuthenticated]);
+
   
   //Cargar productos desde la API
   useEffect(()=>{
@@ -107,7 +119,7 @@ export const CartProvider = ({children}) => {
     return(
         <CartContext.Provider value = {{
             cart, productos, busqueda, setBusqueda, productosFiltrados, cargando, error, handleAddtoCart, clearCart,
-            handleDeleteFromCart
+            handleDeleteFromCart, isAuthenticated, setIsAuth
         }}>
             {children}
         </CartContext.Provider>    

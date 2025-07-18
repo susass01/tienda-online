@@ -1,13 +1,16 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-function RutasProtegidas ({isAuthenticated, children}) {
-    console.log('¿Está autenticado?', isAuthenticated);
-    if(!isAuthenticated){
-        return <Navigate to='/login' replace />
-    }
-    return children
-           
-}
+const RutaProtegidaAdmin = ({ children }) => {
+  const { isAuth } = useAuth();
+  const userRole = localStorage.getItem("userRole");
 
-export default RutasProtegidas
+  if (!isAuth || userRole !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
+export default RutaProtegidaAdmin;

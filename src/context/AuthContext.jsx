@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
   
         const [email, setEmail] = useState('')
         const [password, setPassword] = useState ('')
+        const [userRole, setUserRole] = useState(null);
         const [errors, setErrors] = useState({})
         const [isAuth, setIsAuth] = useState(false);
         const navigate = useNavigate()
@@ -16,15 +17,23 @@ export const AuthProvider = ({children}) => {
     
         useEffect(() =>{
             const isAuthenticated = localStorage.getItem('isAuth') === 'true'
+            const role = localStorage.getItem('userRole');
             if (isAuthenticated){
-                setIsAuth(true)
-                navigate('/admin')
+                setIsAuth(true);
+                setUserRole(role);
+                if(role==='admin'){
+                    navigate('/admin');
+                }else{
+                    navigate('/')
+                }
+                
             }
         }, [])
 
         const logout = () => {
             setIsAuth(false);
             localStorage.removeItem('isAuth');
+            localStorage.removeItem('userRole');
             navigate('/login');
             };
 
@@ -54,10 +63,14 @@ export const AuthProvider = ({children}) => {
                 console.log('User role:', foundUser.role)
 
                 if(foundUser.role === 'admin'){
-                    setIsAuth(true)
-                    localStorage.setItem('isAuth',true)
+                    setIsAuth(true);
+                    setUserRole('admin');
+                    localStorage.setItem('isAuth',true);
+                    localStorage.setItem('userRole', 'admin');
                     navigate('/admin')
                 }else{
+                    setUserRole('cliente');
+                    localStorage.setItem('userRole', 'cliente');
                     navigate('/')
                 }
             }
@@ -68,7 +81,7 @@ export const AuthProvider = ({children}) => {
     };
        return (
         <AuthContext.Provider value = {{email, setEmail, password, setPassword,
-            handleSubmit, errors, isAuth, setIsAuth, logout}}>
+            handleSubmit, errors, isAuth, setIsAuth, logout, userRole, setUserRole}}>
                 {children}
             </AuthContext.Provider>
 
